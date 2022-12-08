@@ -1,13 +1,16 @@
+use aoc_parse::{parser, prelude::*};
+
+
 #[aoc_generator(day1)]
 pub fn input_generator(input: &str) -> Vec<Vec<u32>> {
-    input
-        .split("\n\n")
-        .map(|group| {
-            group
-                .lines()
-                .map(|line| line.parse().unwrap())
-                .collect()
-        }).collect()
+    let p = parser!(sections(lines(u32)));
+
+    // So ugly. The input does properly have an ending newline -
+    // need to either fix cargo-aoc stripping that, or aoc_parse
+    // not being able to handle no ending newline in lines()
+    let input_str = input.to_string() + "\n";
+
+    p.parse(&input_str).unwrap()
 }
 
 #[aoc(day1, part1)]
@@ -29,7 +32,7 @@ mod tests {
 
     #[test]
     fn parses() {
-        let input = "100\n200\n\n100\n100\n";
+        let input = "100\n200\n\n100\n100";
         assert_eq!(input_generator(&input), vec![vec![100, 200], vec![100, 100]]);
     }
 
