@@ -1,7 +1,8 @@
-extern crate aoc_rust_2022;
-extern crate aoc_runner_derive;
-extern crate aoc_runner;
+mod utils;
 
-use aoc_runner_derive::aoc_main;
+mod day1;
 
-aoc_main! { lib = aoc_rust_2022 }
+aoc_main::main! {
+    year 2022;
+    day1 : generator => part1;
+}
