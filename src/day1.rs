@@ -9,13 +9,17 @@ pub fn generator(input: &str) -> Vec<Vec<u32>> {
 }
 
 pub fn part1(input: &Vec<Vec<u32>>) -> u32 {
-    input.iter().map(|group| group.iter().sum()).max().unwrap()
+    let elves = input.iter().map(|group| group.iter().sum());
+    elves.max().unwrap()
 }
 
 pub fn part2(input: &Vec<Vec<u32>>) -> u32 {
     use std::collections::BinaryHeap;
 
-    let mut heap = BinaryHeap::<u32>::from_iter(input.iter().map(|group| group.iter().sum()));
+    let elves = input.iter().map(|group| group.iter().sum());
+
+    // BinaryHeap is a max-heap by default
+    let mut heap = BinaryHeap::<u32>::from_iter(elves);
 
     heap.pop().unwrap() + heap.pop().unwrap() + heap.pop().unwrap()
 }
