@@ -1,3 +1,7 @@
 pub fn newline_end(str: &str) -> String {
-    str.to_string() + "\n"
+    if str.ends_with('\n') {
+        str.to_string()
+    } else {
+        str.to_string() + "\n"
+    }
 }
