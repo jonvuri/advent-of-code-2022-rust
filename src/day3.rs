@@ -43,12 +43,12 @@ pub fn part1(input: &[Vec<char>]) -> Result<u32, &'static str> {
 
             let midpoint = line.len() / 2;
 
-            let first = &line[..midpoint];
-            let second = &line[midpoint..];
+            let first_half = &line[..midpoint];
+            let second_half = &line[midpoint..];
 
-            let first_char_counts = char_counts(first);
+            let first_char_counts = char_counts(first_half);
 
-            for ch in second {
+            for ch in second_half {
                 if first_char_counts[char_count_index(ch)] > 0 {
                     return Ok(char_priority(ch));
                 }
