@@ -4,17 +4,17 @@ use crate::utils;
 
 pub fn generator(input: &str) -> Vec<Vec<u32>> {
     parser!(sections(lines(u32)))
-        .parse(&utils::newline_end(&input))
+        .parse(&utils::newline_end(input))
         .unwrap()
 }
 
-pub fn part1(input: &Vec<Vec<u32>>) -> u32 {
+pub fn part1(input: &[Vec<u32>]) -> u32 {
     let elves = input.iter().map(|section| section.iter().sum());
 
     elves.max().unwrap()
 }
 
-pub fn part2(input: &Vec<Vec<u32>>) -> u32 {
+pub fn part2(input: &[Vec<u32>]) -> u32 {
     use std::collections::BinaryHeap;
 
     let elves = input.iter().map(|section| section.iter().sum());

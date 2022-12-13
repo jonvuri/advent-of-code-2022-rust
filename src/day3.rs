@@ -4,7 +4,7 @@ use crate::utils;
 
 pub fn generator(input: &str) -> Vec<Vec<char>> {
     parser!(lines(alpha+))
-        .parse(&utils::newline_end(&input))
+        .parse(&utils::newline_end(input))
         .unwrap()
 }
 
@@ -37,7 +37,7 @@ pub fn part1(input: &[Vec<char>]) -> Result<u32, &'static str> {
     input
         .iter()
         .map(|line| {
-            if !(line.len() > 0 && line.len() % 2 == 0) {
+            if line.is_empty() || line.len() % 2 == 1 {
                 return Err("Invalid line length");
             }
 
@@ -63,7 +63,7 @@ pub fn part2(input: &[Vec<char>]) -> Result<u32, &'static str> {
     input
         .chunks(3)
         .map(|chunk| {
-            if let [first, second, third] = &chunk[..] {
+            if let [first, second, third] = chunk {
                 let first_char_counts = char_counts(first);
                 let second_char_counts = char_counts(second);
 

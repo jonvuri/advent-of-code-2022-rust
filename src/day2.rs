@@ -4,7 +4,7 @@ use crate::utils;
 
 pub fn generator(input: &str) -> Vec<(char, char)> {
     parser!(lines(alpha " " alpha))
-        .parse(&utils::newline_end(&input))
+        .parse(&utils::newline_end(input))
         .unwrap()
 }
 
