@@ -69,6 +69,7 @@ pub fn part1(input: &Input) -> String {
         target,
     } in input.moves.iter()
     {
+        // Move <quantity> items from source to target one by one
         for _ in 0..*quantity {
             let ch = stacks[*source].pop().unwrap();
             stacks[*target].push(ch)
@@ -81,9 +82,30 @@ pub fn part1(input: &Input) -> String {
         .collect()
 }
 
+pub fn part2(input: &Input) -> String {
+    let mut stacks = input.stacks.clone();
+
+    for Move {
+        quantity,
+        source,
+        target,
+    } in input.moves.iter()
+    {
+        // Move <quantity> items from source to target all at once
+        let length = stacks[*source].len();
+        let mut pile = stacks[*source].split_off(length - quantity);
+        stacks[*target].append(&mut pile);
+    }
+
+    stacks
+        .into_iter()
+        .map(|stack| stack[stack.len() - 1])
+        .collect()
+}
+
 #[cfg(test)]
 mod tests {
-    use super::{generator, part1};
+    use super::{generator, part1, part2};
 
     static EXAMPLE_INPUT: &str = "    [D]    
 [N] [C]    
@@ -99,5 +121,11 @@ move 1 from 1 to 2";
     fn part1_example() {
         let input = generator(EXAMPLE_INPUT);
         assert_eq!(part1(&input), "CMZ");
+    }
+
+    #[test]
+    fn part2_example() {
+        let input = generator(EXAMPLE_INPUT);
+        assert_eq!(part2(&input), "MCD");
     }
 }
