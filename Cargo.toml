@@ -5,4 +5,4 @@ edition = "2021"
 
 [dependencies]
 aoc-main = { version = "0.5.0", features = ["bench"] }
-aoc-parse = "0.1.6"
+aoc-parse = "0.2.17"
